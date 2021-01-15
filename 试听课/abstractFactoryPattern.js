@@ -3,13 +3,13 @@ var XMLHttpFactory = funcrion() {}; // 单例
 
 // 派生子类，如果调用这个方法会抛出1个错误，它不能被实例化，只能用来派生子类
 XMLHttpFactory.prototype = {
-	createFactory: function() {
-		throw new Error('This is a abstract class');
-	}
+    createFactory: function() {
+        throw new Error('This is a abstract class');
+    }
 }
 
 var XMLHandler = function() {
-	XMLHttpFactory.call(this);
+    XMLHttpFactory.call(this);
 }
 
 XMLHandler.prototype = new XMLHttpFactory();
@@ -17,18 +17,17 @@ XMLHandler.prototype.constructor = XMLHandler;
 
 // 重新定义createFactory
 XMLHandler.prototype.createFactory = function() {
-	var XMLHttp = null;
+    var XMLHttp = null;
 
-	if(window.XMLHttpRequest) {
-		XMLHttp = new XMLHttpRequest();
-	} else if(window.ActiveXObject) {
-		XMLHttp = new ActiveXObject('Microsoft.XMLHTTP');
-	}
+    if (window.XMLHttpRequest) {
+        XMLHttp = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        XMLHttp = new ActiveXObject('Microsoft.XMLHTTP');
+    }
 
-	return XMLHttp;
+    return XMLHttp;
 }
 
 var ajaxHander = function() {
-	var XMLHttp = XMLHttpFactory.createFactory;
+    var XMLHttp = XMLHttpFactory.createFactory;
 }
-
