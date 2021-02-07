@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        class JQuery {
+            constructor(selector) {
+                this.selector = selector;
+                let elements = document.querySelectorAll(selector);
+                this.length = elements.length;
+                for (let i = 0; i < this.length; i++) {
+                    this[i] = elements[i];
+                }
+            }
+
+            html() {
+                return this[0].innerHTML;
+            }
+
+            addClass(cls) {
+                for (let i = 0; i < this.length; i++) {
+                    this[i].className = cls;
+                }
+            }
+        }
+        var $ = function(selector) {
+            return new JQuery(selector);
+        }
+        let html = $('li').html();
+        let length = $('li').length;
+        $('li').addClass('red');
+    </script>
+</body>
+</html>
