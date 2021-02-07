@@ -28,13 +28,13 @@ class Factory {
     create() { }
 }
 
-class AppleFactory extends Factory{
+class AppleFactory extends Factory {
     static create () {
         return new Apple('apple', 'tian');
     }
 }
 
-class OrangeFactory {
+class OrangeFactory extends Factory {
     static create () {
         return new Orange('orange', 'suan');
     }
@@ -47,3 +47,10 @@ let orange = OrangeFactory.create();
 console.log(orange);
 
 // 如果想再加入西瓜不用改以前的方法和实例，重新添加西瓜的方法实例即可；
+
+// 一般会跟配置对象配合
+let setting = {
+    'apple': AppleFactory,
+    'orange': OrangeFactory
+}
+let apple = setting['apple'].create();
