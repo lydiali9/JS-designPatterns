@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #bgimg {
+        width: 600px;
+        height: 400px;
+        margin: 100px auto;
+        background-color: aquamarine;
+    }
+
+    #ngimg img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<body>
+    <ul id="menu">
+        <li data-src="/images/bg1.png">图片1</li>
+        <li data-src="/images/bg2.png">图片2</li>
+    </ul>
+    <div id="bgimg"></div>
+    <script>
+        let loadingSrc = '/images/loading.png';
+        let menu = document.getElementById('menu');
+        let bgimg = document.getElementById('bgimg');
+
+        let backgroud = (function() {
+            let img = new Image();
+            bgimg.appendChild(img);
+            return {
+                setSrc(src) {
+                    img.src = src + '?ts=' + Date.now();
+                }
+            }
+        })();
+
+        let ProxyBackgroud = (function() {
+            let img = new Image();
+            img.onload = function() {
+                backgroud.setSrc(this.src);
+            }
+            return {
+                setSrc(src) {
+                    backgroud.setSrc('/images/loading.png');
+                    img.src = src;
+                } 
+            }
+        })();
+
+        menu.addEventListener('click', function(event) {
+            let src = event.target.dataset.src;
+            ProxyBackgroud.setSrc(src);
+        });
+    </script>
+</body>
+</html>

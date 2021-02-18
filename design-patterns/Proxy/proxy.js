@@ -1,18 +1,37 @@
-class Google {
-    get(url) {
-        return 'google';
-    }
-}
+let girl = {
+    name: 'lynnli',
+    age: 28,
+    height: 170
+};
 
-class Proxy {
-    constructor() {
-        this.google = new Google();
+let person = new Proxy(girl, {
+    get(target, key) {
+        if (key == 'age') {
+            return target.age - 2;
+        } else if (key == 'height') {
+            return target.height + 5;
+        } else {
+            return target[key];
+        }
+    },
+    set(target, key, val) {
+        if (key == 'boyfriend') {
+            let boyfriend = val;
+            if (boyfriend.age > 30) {
+                throw new Error('no');
+            } else if (boyfriend.salary  < 200000) {
+                throw new Error('no');
+            } else {
+                target[key] = val;
+            }
+        }
     }
-    get(url) {
-        return this.google.get(url);
-    }
-}
+}) 
 
-let proxy = new Proxy();
-let result = proxy.get('http://www.baidu.com');
-console.log(result);
+console.log(person.age);
+console.log(person.name);
+console.log(person.height);
+person.boyfriend = {
+    age: 40,
+    salary: 20
+}
