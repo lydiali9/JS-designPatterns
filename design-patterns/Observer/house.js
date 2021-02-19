@@ -51,3 +51,4 @@ tenant2.rent(agent);
 
 let landLord = new LandLord();
 landLord.lend(agent, 100, 4000);
+landLord.lend(agent, 200, 6000);
