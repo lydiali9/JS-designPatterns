@@ -27,7 +27,6 @@ class LandLord {
     }
     // 向外出租
     lend(agent, area, money) {
-        debugger
         agent.publish('house', area, money);
     }
 }
@@ -39,7 +38,6 @@ class Tenant {
     }
     // 租房
     rent(agent) {
-        debugger
         agent.subscribe('house', (area, money) => {
             console.log(`${this.name}看到中介的新房源了 ${area}平米，房租${money}元`);
         })
